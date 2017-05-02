@@ -68,9 +68,8 @@
 
 ## Frequently asked questions
 
-#### Docker requires sudo, everytime I run it, what should I do?
+#### Docker requires `sudo` everytime I run it, what should I do?
 Make sure that your user in docker group, the detailed answer is available [here](https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo).
-
 
 #### My tests are not saved, why?
 Make sure that permissions for `TEST_DIR` and `SQL_DATA` are set to `777`.

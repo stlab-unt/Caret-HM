@@ -1,0 +1,40 @@
+{
+    "adb": "/opt/asdk/platform-tools/adb",
+    "aapt": "/opt/asdk/build-tools/25.0.3/aapt",
+    "device": "emulator-5554",
+    "tests": "/tests/",
+    "pre-boot": [
+            "rm -rf /sdcard/*",
+            "pm disable com.google.android.gms",
+            "pm disable com.google.android.gsf.login",
+            "pm disable com.google.android.gsf",
+            "pm disable com.google.android.street",
+            "pm disable com.google.android.play.games",
+            "pm disable com.google.android.apps.maps",
+            "pm disable com.google.android.syncadapters.contacts",
+            "setprop qemu.hw.mainkeys 1",
+            "settings put global auto_time 0",
+            "settings put global auto_time_zone 0",
+            "settings put global window_animation_scale 0",
+            "settings put global transition_animation_scale 0",
+            "settings put global animator_duration_scale 0",
+            "mkdir /sdcard/ss"
+    ],
+    "date": "20160101.000000",
+    "date_assert": "Fri Jan  1",
+    "screenshot": {
+        "dir": "/sdcard/ss/",
+        "cmd": "screencap",
+        "ext": ".png"
+    },
+    "evdev": {
+        "sync": [0, 2],
+        "coord": [3],
+        "ignore": [0,2,3],
+        "home": 102,
+        "capture": [330, 102, 139, 158, 72, 73]
+    },
+    "time_threshold": 0.01,
+    "timeout": 5,
+    "slowdown": 1.25
+}

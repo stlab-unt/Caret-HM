@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1>Admin Area</h1>
+      <uib-tabset active="active">
+        <uib-tab index="0" heading="Heatmap Generation">
+          <form name="myForm" class="form bordered">
+            <div class="form-group">
+              <label for="app">Choose an app from the list</label>
+              <select name="app" ng-model="$ctrl.app" ng-options="a for a in $ctrl.apps" class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label for="dratio">Choose an edit distance ratio between activity and UI state</label>
+              <input type="number" name="dratio" ng-model="$ctrl.distance_ratio" min="0" max="1" required="required" class="form-control"/><span ng-show="!myForm.dratio.$valid" role="alert" class="label label-danger">A number between 0 and 1 is required</span>
+            </div>
+            <div class="form-group">
+              <label for="linkage">Choose a linkage type for agglomerative clustering</label>
+              <select name="linkage" ng-model="$ctrl.linkage" ng-options="l for l in $ctrl.linkages" class="form-control"></select>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-7">
+                <label for="ntype">Choose ratio or fixed number of clusters</label>
+                <select name="ntype" ng-model="$ctrl.ntype" ng-options="t.text for t in $ctrl.ntypes" class="form-control"></select>
+              </div>
+              <div class="form-group col-md-5">
+                <label for="cnumber">Choose a number &nbsp;</label>
+                <input type="number" name="cnumber" ng-model="$ctrl.clusters" min="0.001" max="100" required="required" class="form-control"/><span ng-show="!myForm.cnumber.$valid" role="alert" class="label label-danger">A number between 0.001 and 100 is required</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="button" ng-click="$ctrl.submitApp()" ng-disabled="!myForm.$valid" class="btn btn-primary"><b>Generate</b>
+              </button>
+            </div>
+            <uib-progressbar max="100" value="100" type="info" ng-show="$ctrl.loading" class="progress-striped active">Generating heatmap... Please wait...</uib-progressbar>
+          </form>
+        </uib-tab>
+        <uib-tab index="1" heading="Statistics" disable="!$ctrl.slides">
+          <div class="bordered">
+            <table class="table table-striped mytable">
+              <tr ng-repeat="stat in $ctrl.stats" class="row">
+                <td>{{stat.desc}}</td>
+                <td>{{stat.value}}</td>
+              </tr>
+            </table>
+          </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Heatmaps" disable="!$ctrl.slides">
+          <div uib-carousel="uib-carousel" active="active" class="bordered">
+            <div uib-slide="uib-slide" ng-repeat="slide in $ctrl.slides" index="$index"><img ng-src="{{$ctrl.newImage(slide.image)}}" style="margin:auto" class="img-responsive"/>
+              <div class="carousel-caption">
+                <h4>Image {{$index+1}}</h4>
+              </div>
+            </div>
+          </div>
+        </uib-tab>
+      </uib-tabset>
+    </div>
+  </div>
+</div>

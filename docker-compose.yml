@@ -1,0 +1,97 @@
+version: '3.2'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./conf/html:/usr/share/nginx/html:ro
+      - ./conf/nginx:/etc/nginx/conf.d:ro
+      - images:/usr/share/nginx/html/images:ro
+      - ${TEST_DIR}:/usr/share/nginx/html/tests:ro
+    networks:
+      - priv
+    depends_on:
+      - hmg
+      - guac
+      - guacd
+      - vm
+  hmg:
+    build:
+        context: ./hmg-docker
+        args:
+            USER_ID: ${USER_ID}
+            GROUP_ID: ${GROUP_ID}
+    expose:
+        - "9090"
+    volumes:
+      - ${TEST_DIR}:/tests:ro
+      - images:/images
+    networks:
+      - priv
+  pgsql:
+    image: postgres:alpine
+    restart: always
+    volumes:
+      - ./conf/pgsql:/docker-entrypoint-initdb.d
+      - ${SQL_DATA}:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: gadmin
+      POSTGRES_PASSWORD: guac0911admin
+      POSTGRES_DB: g_db
+    networks:
+      - priv
+  guacd:
+    image: glyptodon/guacd
+    restart: always
+    networks:
+      - priv
+    depends_on:
+      - vm
+  guac:
+    image: glyptodon/guacamole
+    restart: always
+    expose:
+      - "8080"
+    environment:
+      POSTGRES_HOSTNAME: pgsql
+      POSTGRES_DATABASE: g_db
+      POSTGRES_USER: gadmin
+      POSTGRES_PASSWORD: guac0911admin
+      POSTGRES_DEFAULT_MAX_CONNECTIONS_PER_USER: 1
+      GUACD_HOSTNAME: guacd
+      GUACD_PORT_4822_TCP_ADDR: guacd
+      GUACD_PORT_4822_TCP_PORT: 4822
+    networks:
+      - priv
+    depends_on:
+      - pgsql
+      - guacd
+      - vm
+  vm:
+    build:
+        context: ./uscr-docker
+        args:
+            VNCPASS: ${VNCPASS}
+            SDKFILE: ${SDKFILE}
+            USER_ID: ${USER_ID}
+            GROUP_ID: ${GROUP_ID}
+    environment:
+        EMU_NUM: ${EMU_NUM}
+    restart: always
+    expose:
+        - "6001-600${EMU_NUM}"
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    volumes:
+      - ${TEST_DIR}:/tests
+    networks:
+      - priv
+
+volumes:
+  images:
+
+networks:
+  priv:
+    driver: bridge

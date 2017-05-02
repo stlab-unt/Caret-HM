@@ -1,0 +1,23 @@
+#!/bin/bash
+
+export ANDROID_HOME=/opt/asdk/
+export SHELL=/bin/bash
+export QEMU_AUDIO_DRV=none
+
+export DN=`echo $DISPLAY | sed -re 's/.*://'`
+export VMN=$(($DN-100))
+export APORT="$((5554+($VMN-1)*2))"
+
+xsetroot -solid black
+
+echo "DN: $DN"
+echo "VMN: $VMN"
+echo "DISPLAY: $DISPLAY"
+cd $ANDROID_HOME/tools
+$ANDROID_HOME/tools/emulator -avd vm$VMN -port $APORT &
+
+sleep 10
+
+cd ~/uscr$VMN/
+echo "MotionNotify 505 15 ButtonPress 1 ButtonRelease 1" | xmacroplay -d 1 :10$VMN
+python ~/uscr$VMN/ui.py $VMN &

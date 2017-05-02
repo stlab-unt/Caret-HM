@@ -11,7 +11,7 @@
 - `docker-compose` 1.12.0 or later
 
 ## Getting Started
-1. Copy contents of docker-compose project in the desired folder
+1. Execute `git clone https://github.com/stlab-unt/Caret-HM.git`
 2. Modify `.env`:
   - Set `USER_ID`, `GROUP_ID` to your user and group id
   - Set `EMU_NUM` to a number of desired emulators (usually, number of cores - 2)

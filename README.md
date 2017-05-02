@@ -61,6 +61,10 @@
         - Encrypted in `conf/pgsql/002-create-admin-user.sql` using SHA256, more information is at [Guacamole website](https://guacamole.incubator.apache.org/doc/gug/jdbc-auth.html), or
        - Guacamole user settings inteface (administrator cannot change its password from Guacamole admin inteface)
 
+## Adding your own app
+1. Add your apk to `uscr-docker/uscr/apk`
+2. Copy and modify one of the configuration files at `uscr-docker/uscr/conf`
+
 ## Frequently asked questions
 
 #### Docker requires sudo, everytime I run it, what should I do?
@@ -74,4 +78,3 @@ Make sure that permissions for `TEST_DIR` and `SQL_DATA` are set to `777`.
 - The first place to start is always to check permissions.
 - Verify that your `USER_ID` and `GROUP_ID` are corresponding to your user and group ids.
 - If nothing helps, please [submit a new issue](https://github.com/stlab-unt/Caret-HM/issues/new).
-  

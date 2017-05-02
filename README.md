@@ -6,7 +6,8 @@
 ## Prerequisites
 - `Ubuntu` 16.04 or later
 - Access to `/dev/kvm`:
-  `chmod 777 /dev/kvm`
+
+    `chmod 777 /dev/kvm`
 - `docker` 17.03 or later
 - `docker-compose` 1.12.0 or later
 

@@ -125,7 +125,7 @@ def create_heatmaps(app, config):
         data = json.load(open(fn))
         x = y = 0
 
-        n_actions = len([i for i in data if i['command'][0] != 0 and i['command'][2] == 0])
+        n_actions = len([i for i in data if i['command'][0] != 0 and i['command'][2] == 0 and i['command'][1] != 58])
         if n_actions < na_min:
             na_min = n_actions
         if n_actions > na_max:

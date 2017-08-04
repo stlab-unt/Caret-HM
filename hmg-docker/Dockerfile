@@ -6,7 +6,7 @@ ARG GROUP_ID=1000
 
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories && \
     apk add --no-cache python libstdc++ lapack-dev libxml2-dev libxslt-dev \
-    libjpeg-turbo-dev zlib-dev libpng-dev freetype-dev cython py-numpy-dev \
+    libjpeg-turbo-dev zlib-dev libpng-dev freetype-dev cython-dev py-numpy-dev \
     py-lxml py-scipy py-pillow uwsgi-python shadow && \
     python -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \

@@ -18,7 +18,7 @@ RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositor
     pip install matplotlib && \
     pip install pandas && \
     pip install scikit-learn && \
-    pip uninstall --yes cython && \
+    pip uninstall --yes cython-dev && \
     rm /usr/include/xlocale.h && \
     rm -r /root/.cache && \
     apk del .build-dependencies && \

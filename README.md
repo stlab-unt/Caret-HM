@@ -3,6 +3,12 @@
 
 *Version 1.0*
 
+## TODO List
+1. Rewrite sendevent so that it accepts multiple commands at once
+2. Explore the possibility to reject starting activities that outside the package scope
+3. Make instrumentation more uniform and explain how to instrument apps for the framework.
+
+
 ## Prerequisites
 - `Ubuntu` 16.04 or later
 - Access to `/dev/kvm`:

@@ -1,7 +1,12 @@
 # Caret-HM
 *Capture/Replay And Heatmap Generation Framework for Android*
 
-*Version 1.0*
+*Version 0.1*
+
+# Publication
+The paper is available at https://dl.acm.org/citation.cfm?id=3098231&CFID=817670001&CFTOKEN=90212699
+The demonstration video is available at https://www.youtube.com/watch?v=eMSNAKM1Bj4
+
 
 ## TODO List
 1. Rewrite sendevent so that it accepts multiple commands at once
